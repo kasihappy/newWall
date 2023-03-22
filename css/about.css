@@ -11,10 +11,11 @@
     height: 250px;
     width: 100%;
     background-image: url("../image/headimg2.jpg");
-    background-size: 1540px;
+    background-size: 1650px;
     background-repeat: no-repeat;
-    background-position-y: -190px;
-    background-position-x: -150px;
+    background-position-y: -100px;
+    background-position-x: 0px;
+    background-attachment: fixed;
     overflow: hidden;
     border-bottom: 5px solid rgb(58, 83, 85);
     animation: headload 0.9s linear;
@@ -23,6 +24,7 @@
     color: rgb(92, 136, 177);
     font-size: 5em;
     text-align: center;
+    padding-left: 300px;
     line-height: 200px;
 }
 

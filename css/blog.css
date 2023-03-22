@@ -26,13 +26,13 @@
     box-shadow: 0 0 15px rgba(103, 122, 138, 0.8);
 }
 .c1{
-    animation: c1load 0.5s linear;
+    animation: c1load 1.5s ease-out;
 }
 .c2{
-    animation: c2load 1s linear;
+    animation: c2load 2.5s ease-out;
 }
 .c3{
-    animation: c3load 1.5s linear;
+    animation: c3load 3.5s ease-out;
 }
 
 .c1 .img{
@@ -79,6 +79,7 @@
     color: rgb(53, 75, 104);
 }
 .pri{
+    position: fixed;
     height: 500px;
     width: 300px;
     float: right;
@@ -86,7 +87,7 @@
     position: fixed;
     margin-top: -650px;
     margin-left: 1100px;
-    animation: priload 2s linear;
+    animation: priload 0.5s linear;
 }
 
 .pri .prihead{
