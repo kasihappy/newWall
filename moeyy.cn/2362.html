@@ -81,13 +81,14 @@
 </div>
 </div>
 </header>
+
 <div class="openNav no-select">
 <div class="iconflat no-select">
 <div class="icon"></div>
 </div>
 </div>
 <section id="main-container">
-<div class="headertop filter-dim">
+    <div class="headertop filter-dim">
 <div id="banner_wave_1"></div>
 <div id="banner_wave_2"></div>
 <figure id="centerbg" class="centerbg">
@@ -96,7 +97,8 @@
 </figure>
 <div id="video-container" style=""><video id="bgvideo" class="video" preload="auto"></video><div id="video-btn" class="loadvideo videolive"></div><div id="video-add"></div><div class="video-stu"></div></div>
 <div class="headertop-down faa-float animated" onclick="headertop_down()"><span><i class="fa fa-chevron-down" aria-hidden="true" style="color:rgba(255,255,255,0.8)"></i></span></div>
-</div>
+    </div>
+
 <div id="page" class="site wrapper">
 <div class="pattern-center-blank"></div>
 <div class="pattern-center single-center">
@@ -105,20 +107,120 @@
 </div>
 <div id="content" class="site-content"> <div id="primary" class="content-area">
 <main id="main" class="site-main" role="main">
+    <div class="has-toc have-toc"></div>
+    <article id="post-2362" class="post-2362 post type-post status-publish format-standard has-post-thumbnail hentry category-pc">
+    <div class="entry-content">
+<p>这里主要是记录BUUCTF上Web的解法</p>
+<figure class="wp-block-image size-full"><img decoding="async" loading="lazy" width="865" height="412" data-src="../mcdn.moeyy.cn/2023/03/ctfweb.png" src="https://acdn.moeyy.cn/jsdelivr/gh/Fuukei/Public_Repository@latest/vision/load_svg/inload.svg" onerror="imgError(this)" alt="" class="wp-image-2366 lazyload"/>
+    <noscript>
+    <img decoding="async" loading="lazy" width="865" height="412" src="../mcdn.moeyy.cn/2023/03/ctfweb.png" alt="" class="wp-image-2366"/>
+    </noscript></figure>
 
+<h2>[极客大挑战 2019]EasySQL</h2>
+<p>启动靶机后，看到是输入用户名和密码，判断应该是SQL注入，先试试<strong>万用注入</strong></p>
+<figure class="wp-block-image size-full"><img decoding="async" loading="lazy" width="865" height="412" data-src="../mcdn.moeyy.cn/2023/03/ctf1.png" src="https://acdn.moeyy.cn/jsdelivr/gh/Fuukei/Public_Repository@latest/vision/load_svg/inload.svg" onerror="imgError(this)" alt="" class="wp-image-2366 lazyload"/>
+    <noscript>
+    <img decoding="async" loading="lazy" width="865" height="412" src="../mcdn.moeyy.cn/2023/03/ctf1.png" alt="" class="wp-image-2366"/>
+    </noscript></figure>
+<code>username=1; password = 1'or'1'='1</code>
+<p>成功获取flag</p>
+
+<h2>[极客大挑战 2019]Havefun</h2>
+<p>启动靶机后，发现一只可爱的猫猫在摇尾巴，这个页面倒是可以学习一下</p>
+<figure class="wp-block-image size-full"><img decoding="async" loading="lazy" width="865" height="412" data-src="../mcdn.moeyy.cn/2023/03/ctf2.png" src="https://acdn.moeyy.cn/jsdelivr/gh/Fuukei/Public_Repository@latest/vision/load_svg/inload.svg" onerror="imgError(this)" alt="" class="wp-image-2366 lazyload"/>
+    <noscript>
+    <img decoding="async" loading="lazy" width="865" height="412" src="../mcdn.moeyy.cn/2023/03/ctf2.png" alt="" class="wp-image-2366"/>
+    </noscript></figure>
+<p>回到CTF，既然这个页面没有什么明显信息，那应该是要考察对页面源代码的<strong>代码审计</strong></p>
+<p>查看页面源代码，发现有这么一段注释</p>
+<pre class="wp-block-code"><code style="background-color: #fae7c1; color: #000000;font-family: Arial, Helvetica, sans-serif; font-size: 20px;">                &lt;!--
+    $cat=$_GET['cat'];
+    echo $cat;
+    if($cat=='dog'){
+        echo 'Syc{cat_cat_cat_cat}';
+    }
+    --&gt;</code></pre>
+<p>提示我们源代码中有个cat变量，并且是通过get方式传参，如果cat得到的是dog，会执行一个函数，这个函数应该会和flag相关</p>
+<p>构造<strong>payload:</strong> <code>/?cat=dog</code></p>
+<p>这样flag就直接显示在了屏幕上</p>
+
+<h2>[HCTF 2018]WarmUp</h2>
+<p>启动靶机，发现只显示了一个斜眼笑，看看源代码</p>
+<p>提示存在文件source.php,打开看看，显示以下代码</p>
+<pre class="wp-block-code"><code style="background-color: #fae7c1; color: #000000;font-family: Arial, Helvetica, sans-serif; font-size: 20px; height: 300px; overflow: auto;">&lt;?php
+    highlight_file(__FILE__);
+    class emmm
+    {
+        public static function checkFile(&$page)
+        {
+            $whitelist = ["source"=>"source.php","hint"=>"hint.php"];
+            if (! isset($page) || !is_string($page)) {
+                echo "you can't see it";
+                return false;
+            }
+
+            if (in_array($page, $whitelist)) {
+                return true;
+            }
+
+            $_page = mb_substr(
+                $page,
+                0,
+                mb_strpos($page . '?', '?')
+            );
+            if (in_array($_page, $whitelist)) {
+                return true;
+            }
+
+            $_page = urldecode($page);
+            $_page = mb_substr(
+                $_page,
+                0,
+                mb_strpos($_page . '?', '?')
+            );
+            if (in_array($_page, $whitelist)) {
+                return true;
+            }
+            echo "you can't see it";
+            return false;
+        }
+    }
+
+    if (! empty($_REQUEST['file'])
+        && is_string($_REQUEST['file'])
+        && emmm::checkFile($_REQUEST['file'])
+    ) {
+        include $_REQUEST['file'];
+        exit;
+    } else {
+        echo "&lt;br&gt;&lt;img src=\"https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\" /&gt;";
+    }  
+?&gt;</code></pre>
+<p>可以看到有一个file变量通过request传参，首先不能为空，其次是个字符串，最后要通过check</p>
+<p>现在再来看看这个checkFile函数，能进入这里file肯定能过第一个check point,对于第二个判断，我们只需要输入的file在白名单中，就能通过checkFile</p>
+<p>构造<strong>payload:</strong> <code>/?file=hint.php</code>,可以看到这样一段话</p>
+<p><code>flag not here, and flag in ffffllllaaaagggg</code></p>
+<p>它提示说flag在一个名为ffffllllaaaagggg的文件中，这肯定不会让你无脑找，一般flag文件会存在服务器的根目录下</p>
+<p>通过<strong>../</strong>进入上级目录，一直到能正确打开ffffllllaaaagggg文件，最终的payload为</p>
+<code>/?file=hint.php?../../../../../ffffllllaaaagggg</code>
+<p>要注意使用?将两部分分开，不然通过不了checkFile</p>
+
+<h2>[ACTF2020 新生赛]Include</h2>
+<p>进入靶机后，第一个页面显示有个tips按钮，点击后转到另一个页面，显示"can you find out the flag?"，通过对这两个页面的源代码查看也没有任何信息，此时观察第二个页面的链接，通过输入file文件名跳转，猜测flag应该在该服务器下的其他文件中，通过后台扫描</p>
+<iframe src="iframe-content.html"></iframe>    
+</div> <!-- end of content -->
 <section class="author-profile">
-<div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-<a href="index.html" class="profile gravatar"><img src="../mcdn.moeyy.cn/2023/03/logo.png" itemprop="image" alt="Kasi" height="70" width="70"></a>
-<div class="meta">
-<span class="title">Author</span>
-<h3 itemprop="name">
-<a href="index.html" itemprop="url" rel="author">Kasi</a>
-</h3>
-</div>
-</div>
-<hr>
-<p><i class="iconfont icon-write"></i>一条有远大理想的咸鱼</p>
-</section>
+    <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <a href="index.html" class="profile gravatar"><img src="../mcdn.moeyy.cn/2023/03/logo.png" itemprop="image" alt="Kasi" height="70" width="70"></a>
+    <div class="meta">
+    <span class="title">Author</span>
+    <h3 itemprop="name">
+    <a href="index.html" itemprop="url" rel="author">Kasi</a>
+    </h3>
+    </div>
+    </div>
+    <p><i class="iconfont icon-write"></i>一条有远大理想的咸鱼</p>
+    </section>
 </main>
 </div>
 </div>
