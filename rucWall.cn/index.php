@@ -11,13 +11,12 @@ $html = <<< EOT
     　 　 ∕ 　　●　　　 ●　＼
       ＝＝　○　∴·╰╯　∴　○　＝＝
     　    ╭──╮　　　　　╭──╮
-  ╔═ ∪∪∪═Mashiro&Hitomi═∪∪∪═╗
+  ╔═ ∪∪∪═kasihappy's==cat═∪∪∪═╗
 -->
 <html lang="zh-CN">
 
 
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <head>
     <meta http-equiv="x-dns-prefetch-control" content="on"/>
     <meta name="theme-color">
@@ -1247,10 +1246,9 @@ $html = <<< EOT
 
 EOT;
 
-echo $html;
 require 'controller/post/showPost.php';
 
-$html = <<< EOT
+$html .= <<< EOT
 
 
 
@@ -1343,3 +1341,5 @@ $html = <<< EOT
 
 </html>
 EOT;
+
+echo  $html;

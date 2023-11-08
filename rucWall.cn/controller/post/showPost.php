@@ -1,6 +1,8 @@
 <?php
+//此程序仅用于index.php
 //连接数据库
-require './../db/db_connect.php';
+$conn = new mysqli('localhost', 'hacker', '123456', 'newWall');
+
 $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($conn, $sql);
 
@@ -11,10 +13,11 @@ $content = $post['content'];
 $author = $post['author'];
 $date = $post['date'];
 $id = $post['id'];
-$prevId = max(($id - 1), 0);
+$pngId = $post['pngId'];
+$prevId = max(($id - 1), -1);
 if ($prevId == 0) { $prevId = "";}
 
-$html = <<< EOT
+$html .= <<< EOT
             <!-------------------------------------------php控制部分------------------------------------------------------------->
             <div id="primary" class="content-area">
                 <main id="main" class="site-main" role="main">
@@ -22,8 +25,8 @@ $html = <<< EOT
 
                     <article class="post post-list-thumb  post-list-show" itemscope="">
                         <div class="post-thumb">
-                            <a href="2362.html">
-                                <img class="lazyload" data-src="../mcdn.kasihappy/2023/03/homepic1.png"/>
+                            <a href="posts/{$id}.html">
+                                <img class="lazyload" data-src="../mcdn.kasihappy/2023/03/homepic{$pngId}.png"/>
                             </a>
                         </div>
                         <div class="post-content-wrap">
@@ -31,7 +34,7 @@ $html = <<< EOT
                                 <div class="post-date">
                                     <i class="iconfont icon-time"></i>发布于 {$date}
                                 </div>
-                                <a href="2362.html" class="post-title">
+                                <a href="posts/{$id}.html" class="post-title">
                                     <h3><strong>{$title}</strong></h3>
                                 </a>
                                 <div class="post-meta">
@@ -58,5 +61,3 @@ $html = <<< EOT
             </div><!-- #primary -->
             <!--------------------------------结束------------------------------------------>
 EOT;
-
-echo $html;

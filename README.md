@@ -1,4 +1,5 @@
 # A Totally New Wall
-## version2.0
+## version2.1
 ## update log
-version2.0: trying to combine posts in one html
+version2.1: show posts in one html
+version2.0: totally changed to another website
