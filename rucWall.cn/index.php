@@ -23,8 +23,6 @@ $html = <<< EOT
     <meta charset="UTF-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <meta name="description" content="一条有远大理想的咸鱼。"/>
-    <meta name="keywords" content="Kasi,moeyy blog,萌歪,萌歪的小博客"/>
     <link rel="shortcut icon" href="favicon.ico"/>
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <link id="entry-content-css" rel="prefetch" as="style"
@@ -1136,7 +1134,7 @@ $html = <<< EOT
             </a>
             <div class="header-user-menu">
                 <div class="herder-user-name no-logged">
-                    <a id="login-link" href="#" data-no-pjax style="font-weight:bold;text-decoration:none">登录</a>
+                    <a id="login-link" href="view/login.html" data-no-pjax style="font-weight:bold;text-decoration:none">登录</a>
                 </div>
             </div>
         </div>
@@ -1144,23 +1142,10 @@ $html = <<< EOT
         <div class="lower">
             <nav>
                 <ul id="menu-menu-1" class="menu">
-                    <li class="current-menu-item"><a href="index.html" aria-current="page"><i class="fa fa-home"></i>
+                    <li class="current-menu-item"><a href="index.php" aria-current="page"><i class="fa fa-home"></i>
                         <b>主页</b></a></li>
-                    <li><a href="author/admin.html"><i class="fa fa-list-alt"></i> <b>文章</b></a>
-                        <ul class="sub-menu">
-                            <li><a href="timeline/index.html"><i class="fa fa-clock-o"></i> <b>时光轴</b></a></li>
-                        </ul>
-                    </li>
-                    <li><a href="shuo/index.html"><i class="fa fa-pencil"></i> <b>说说</b></a></li>
-                    <li><a href="guestbook/index.html"><i class="fa fa-commenting-o"></i> <b>留言板</b></a></li>
-                    <li><a href="links/index.html"><i class="fa fa-link"></i> <b>友人帐</b></a></li>
-                    <li><a href="bangumi/index.html"><i class="fa fa-film"></i> <b>追番</b></a></li>
-                    <li><a href="app/index.html"><i class="fa fa-cube"></i> <b>Kasi Apps</b></a></li>
-                    <li><a href="#"><i class="fa fa-bars"></i> <b>更多</b></a>
-                        <ul class="sub-menu">
-                            <li><a href="https://chatmindai.com/"><i class="fa fa-play-circle"></i> Online Chat</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="view/addPost.html"><b>我要发表</b></a></li>
+                    <li><a href="view/publicPost.html"><i class="fa fa-commenting-o"></i> <b>留言板</b></a></li>
                 </ul>
             </nav><!-- #site-navigation -->
         </div>
@@ -1188,7 +1173,7 @@ $html = <<< EOT
                     <li id="bg-pre"><img
                             src="../acdn.kasihappy/jsdelivr/gh/Fuukei/Sakurairo_Vision@2.5/display_icon/muh2/pre.png"
                             loading="lazy" alt="上一篇"/></li>
-                    <li><a href="https://space.bilibili.com/495235331" target="_blank" class="social-bili"
+                    <li><a href="https://bilibili.com/" target="_blank" class="social-bili"
                            title="bilibili"><img alt="bilibili" loading="lazy"
                                                  src="../acdn.kasihappy/jsdelivr/gh/Fuukei/Sakurairo_Vision@2.5/display_icon/muh2/bilibili.png"/></a>
                     </li>
@@ -1196,7 +1181,7 @@ $html = <<< EOT
                             alt="qq" loading="lazy"
                             src="../acdn.kasihappy/jsdelivr/gh/Fuukei/Sakurairo_Vision@2.5/display_icon/muh2/qq.png"/></a>
                     </li>
-                    <li><a href="#" class="social-wangyiyun" title="cloudmusic"><img alt="cloudmusic"
+                    <li><a href="https://music.163.com/" class="social-wangyiyun" title="cloudmusic"><img alt="cloudmusic"
                                                                                                      loading="lazy"
                                                                                                      src="../acdn.kasihappy/jsdelivr/gh/Fuukei/Sakurairo_Vision@2.5/display_icon/muh2/ncm.png"/></a>
                     </li>
@@ -1218,17 +1203,6 @@ $html = <<< EOT
                 </div>
             </div>
         </figure>
-<!--        <div id="video-container" style="">
-            <video id="bgvideo" class="video" preload="auto"></video>
-            <div id="video-btn" class="loadvideo videolive"></div>
-            <div id="video-add"></div>
-            <div class="video-stu"></div>
-        </div>&lt;!&ndash; 首页下拉箭头 &ndash;&gt;-->
-<!--        <div class="headertop-down faa-float animated" onclick="headertop_down()">
-            <span>
-                <i class="fa fa-chevron-down" aria-hidden="true" style="color:rgba(255,255,255,0.8)"></i>
-            </span>
-        </div>-->
     </div>
     <div id="page" class="site wrapper">
         <div class="blank"></div>
